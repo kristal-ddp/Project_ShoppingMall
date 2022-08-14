@@ -11,7 +11,7 @@
 <title>탈퇴화면</title>
 <link rel="stylesheet" type="text/css"href="<%=cp%>/css/shopStyle.css" />
 <link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/memberListStyle.css" />
-
+<link rel="stylesheet" type="text/css"href="<%=cp%>/member/css/member.css" />
 <script type="text/javascript">
 
 	function deleteValue() {
@@ -24,8 +24,9 @@
 			return false;
 		}
 		f.action = "<%=cp%>/shop/member/delete_ok.do";
+		alert(" 정말로 회원 탈퇴 하시겠습니까?");
 		f.submit();
-		
+		alert("회원 탈퇴 완료");
 		
 	}
 
@@ -44,40 +45,50 @@
 <form action="" method="post" name="deleteForm" onsubmit="return deleteValue();">
 
 	<div id="left_area" style="display: inline-block;" >
-               <div id="update_area" style="width: 600px;">
-                  <div class="box row">
-                  
-                  <div class="box label">
-                        <label for="userName"><span><b>I&nbsp;&nbsp;D</b></span></label>
-                     </div>
-                   <div class="box input">
-                        <input type="text" name="userId" id="userId"  readonly="readonly" value="${dto.userId }" />
-                     </div>
-                   </div>
-                   
-                   
-                    <div class="box row">
-	                     <div class="box label">
-	                        <label for="userName"><span><b>NAME</b></span></label>
-	                     </div>
-	                     <div class="box input">
-	                        <input type="text" name="userName" id="userName" value="${dto.userName }"/>
-	                     </div>
-             		</div>
-                  
-                    <div class="box row">
-	                     <div class="box label">
-	                        <label for="userName"><span><b>PASSWORD</b></span></label>
-	                     </div>
-	                     <div class="box input">
-	                        <input type="text" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요."/>
-	                     </div>
-             		</div>
-                
-            </div>
-	</div>
+         	<div id="update_area">
+                <div class="box row">
+	                <div class="box label">
+	                	<label for="userName" >
+	                		<span>
+	                       		<a>ID</a>
+	                       	</span>
+	                	</label>
+	                 </div>
+	                 <div class="box input">
+	                 	<input type="text" name="userId" id="userId" readonly="readonly" value="${dto.userId }"  />
+	                 </div>
+                 </div>
+                 
+                 <div class="box row">
+	                 <div class="box label">
+	                    <label for="userName" >
+		                    <span>
+		                     	<a>NAME</a>
+	                     	</span>
+                     	</label>
+	                 </div>
+	                 <div class="box input">
+	                    <input type="text" name="userName" id="userId" readonly="readonly"  value="${dto.userName }"//>
+	                 </div>
+                 </div>
+                 
+				 <div class="box row">
+	                 <div class="box label">
+	                    <label for="userName" >
+		                    <span>
+		                     	<a>PASSWORD</a>
+	                     	</span>
+                     	</label>
+	                 </div>
+	                 <div class="box input">
+	                    <input maxlength="20" type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요."/>
+	                 </div>
+                 </div>
+			</div>
+		</div>
+
 <br><br>
-					<div align="center">	
+					<!-- <div align="center">	
 						<button  style="cursor:pointer; border:none; background-color: #FOFOFO; width: 200px; height: 50px;"
 							type="button" onclick="javascript:history.back();">
 								<b style="font-size: 17px; color: black;">뒤로가기</b>
@@ -87,10 +98,26 @@
 							type="button" onclick="deleteValue();">
 								<a style="font-size: 17px; color: white;">탈&nbsp;퇴</a>
 						</button>	
-					</div>	
-				
+					</div>
+ -->
+			<div align="center">
+				<div style="float: left; padding-left: 370px; padding-right: 10px;">
+					<button class="add_button" type="button" style="width: 170px;"
+						onclick="javascript:history.back();">
+						<a style="font-size: 8px; color: #484848;">BACK</a>
+					</button>
+				</div>
 
-</form>
+				<div style="float: left;">
+					<button class="add_button" type="button" style="width: 170px;"
+						onclick="deleteValue();">
+						<a style="font-size: 8px; color: #484848;">WITHDRAW</a>
+					</button>
+				</div>
+			</div>
+
+
+		</form>
 
 
 

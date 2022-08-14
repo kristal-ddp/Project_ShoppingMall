@@ -10,6 +10,7 @@ public class OrdersDTO {
 	private String orderSize;
 	private String updatedDate;
 	private String progress;
+	private int review;
 
 	private String productName;
 	private int productPrice;
@@ -78,6 +79,14 @@ public class OrdersDTO {
 
 	public void setProgress(String progress) {
 		this.progress = progress;
+	}
+
+	public int getReview() {
+		return review;
+	}
+
+	public void setReview(int review) {
+		this.review = review;
 	}
 
 	public String getProductName() {

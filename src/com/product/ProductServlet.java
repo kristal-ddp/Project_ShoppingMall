@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.boards.QnaDAO;
+import com.boards.QnaDTO;
+import com.boards.ReviewDAO;
+import com.boards.ReviewDTO;
 import com.util.DBConn;
 import com.util.MyPage;
 
@@ -168,6 +172,9 @@ public class ProductServlet extends HttpServlet{
 				userId = sessionUserId;
 			}
 			
+			List<QnaDTO> qnaList = new QnaDAO(conn).getLists(productNum);
+			List<ReviewDTO> reviewList = new ReviewDAO(conn).getLists(productNum);
+			
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("pageNum", pageNum);
@@ -177,6 +184,8 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("sizeLength", sizeLength);
 			req.setAttribute("colorLength", colorLength);
 			req.setAttribute("userId", userId);
+			req.setAttribute("qnaList", qnaList);
+			req.setAttribute("reviewList", reviewList);
 			
 			url = "/product/detail.jsp";
 			forward(req, resp, url);

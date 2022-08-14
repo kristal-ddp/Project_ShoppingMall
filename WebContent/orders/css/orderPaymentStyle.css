@@ -215,8 +215,10 @@ li{
 	font: 9pt;
 	font-style: italic;
 	display: inline-block;
-    width: 100px;
-    border: none;
+    /* width: 100px; */
+    width: 250px;
+    /* border: none; */
+    border: 1px solid #EEEEEE;
     float: left;
     outline: none;
 }

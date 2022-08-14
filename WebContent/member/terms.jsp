@@ -12,12 +12,14 @@
 
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/shopStyle.css" />
-<link rel="stylesheet" href="<%=cp%>/member/css/style.css" type="text/css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/member/css/member.css" />
+<link rel="stylesheet" href="<%=cp%>/member/css/style.css"
+	type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="<%=cp%>/member/css/member.css" />
 
 <script type="text/javascript">
 	function chk() {
-		 var req1 = document.form.req2.checked;
+		 var req1 = document.form.req1.checked;
 		 var req2 = document.form.req2.checked;
 	
 		 if(req1 == true && req2 == true){
@@ -31,6 +33,17 @@
 		alert("동의하지 않으면 가입하실 수 없습니다");
 		location.href="<%=cp%>/shop/member/terms.do";
 	}
+	
+	function selectAll(selectAll)  {
+		  const checkboxes 
+		     = document.querySelectorAll('input[type="checkbox"]');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked
+		  })
+		}
+	
+	
 </script>
 
 </head>
@@ -38,18 +51,19 @@
 	<jsp:include page="../main/header.jsp" />
 
 	<div id="content" align="center">
-	<div class="joinTitle" align="center" style="font-weight: 700;padding-top: 15px;font: 10pt;">회원가입</div>
-		
+		<div class="joinTitle" align="center"
+			style="font-weight: 700; padding-top: 15px; font: 10pt;">회원가입</div>
+
 		<form action="<%=cp%>/shop/member/join.do" name="form" method="post">
-			<table class="joinCheck" width="600" height="650">
+			<table class="joinCheck" width="600" height="580">
 				<tr>
 					<td width="100%" height="50%" align="center">
 						<ul class="terms_bx_list">
-							<li class="terms_bx">
-							<span class="input_chk">
-								<input type="checkbox" id="termsService" name="req1" class="chk">
-								<label for="termsService" style="font: 8pt;vertical-align: middle;">Kristal 이용약관 동의
-								<span class="terms_necessary">(필수)</span>
+							<li class="terms_bx"><span class="input_chk"> <input
+									type="checkbox" id="termsService" name="req1" class="chk">
+									<label for="termsService"
+									style="font: 8pt; vertical-align: middle;">Kristal 이용약관
+										동의 <span class="terms_necessary">(필수)</span>
 								</label>
 							</span>
 								<div class="terms_box" tabindex="0" id="divService">
@@ -404,18 +418,19 @@
 									</div>
 								</div></li>
 							<li class="terms_bx"><span class="input_chk"> <input
-									type="checkbox" id="termsPrivacy" name="req2"
-									class="chk"> <label for="termsPrivacy"
-									class="collect_personal" style="vertical-align: middle;">개인정보 수집 및 이용 동의<span
+									type="checkbox" id="termsPrivacy" name="req2" class="chk">
+									<label for="termsPrivacy" class="collect_personal"
+									style="vertical-align: middle;">개인정보 수집 및 이용 동의<span
 										class="terms_choice">(필수)</span></label> <a href="#" id="termForChild"
 									class="easy_guide" role="button" target="_blank"></a>
 							</span>
 								<div class="terms_box" tabindex="0" id="divPrivacy">
 									<!-- 개인정보 수집 및 이용에 대한 안내 -->
-									<div class="policy_summary" >
-										<p class="policy_summary__text" style="font: 12pt;">개인정보보호법에 따라 Kristal에 회원가입
-											신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의
-											거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.</p>
+									<div class="policy_summary">
+										<p class="policy_summary__text" style="font: 12pt;">개인정보보호법에
+											따라 Kristal에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적,
+											개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은
+											후 동의하여 주시기 바랍니다.</p>
 									</div>
 									<div class="article">
 										<h3 class="article__title">1. 수집하는 개인정보</h3>
@@ -540,8 +555,7 @@
 													인증 업무에 관한 기록: 인증서 효력 상실일로부터 10년 보관
 												</li>
 												<li class="sections__section">- 통신비밀보호법 <br>로그인
-													기록: 3개월<br>
-												<br>
+													기록: 3개월<br> <br>
 												</li>
 											</ul>
 											<p class="clause__text"></p>
@@ -557,9 +571,10 @@
 									</div>
 								</div></li>
 							<li class="terms_bx"><span class="input_chk"> <input
-									type="checkbox" id="termsLocation" name="req3"
-									value="Y" class="chk"> <label for="termsLocation" style="vertical-align: middle;">위치기반서비스
-										이용약관 동의<span class="terms_choice terms_no">(선택)</span>
+									type="checkbox" id="termsLocation" name="req3" value="Y"
+									class="chk"> <label for="termsLocation"
+									style="vertical-align: middle;">위치기반서비스 이용약관 동의<span
+										class="terms_choice terms_no">(선택)</span>
 								</label>
 							</span> <!-- tg-lang=>"ko" -->
 								<div class="terms_box" id="divLocation">
@@ -762,8 +777,7 @@
 										</ol>
 									</div>
 								</div> <!-- tg-lang --></li>
-						</ul>
-						<!--  <textarea rows="30" cols="75">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
+						</ul> <!--  <textarea rows="30" cols="75">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
 회원가입
 - 이름, 생년월일, 성별, 아이디, 비밀번호, 별명, 연락처(메일주소, 휴대폰 번호 중 선택), 가입인증정보
 만14세 미만 아동 회원가입
@@ -789,16 +803,36 @@
 						<b style="font-size: 10pt">개인정보 수집 및 이용에동의합니다.</b> -->
 					</td>
 				</tr>
-				<tr>
-					<td align="center" valign="top">
-						<div class="selectAgree">
-							<input class="btn" style="font-size: 10pt" type="button" value=" 동의 " onclick="chk()" />&nbsp;&nbsp;&nbsp;
-							<input class="btn"  style="font-size: 10pt" type="button" value=" 비동의 " onclick="nochk()" />
-						</div>
-					</td>
-				</tr>
-
 			</table>
+
+		 						<span class="input_chk">
+								<input type='checkbox' name='selectall' value='selectall'
+								onclick='selectAll(this)' />
+								<label for="termsService" style="font: 8pt;vertical-align: middle;">전체 이용약관 동의
+								
+								
+								</label>
+							</span> 
+
+			<!-- <input type='checkbox' name='selectall' value='selectall'
+				onclick='selectAll(this)' /> <b>전체 선택</b> -->
+
+
+			<div align="center">
+				<div style="float: left; padding-left: 370px; padding-right: 10px;">
+					<button class="add_button" type="button" style="width: 170px;"
+						onclick="chk();">
+						<a style="font-size: 8px; color: #484848;">동의</a>
+					</button>
+				</div>
+
+				<div style="float: left;">
+					<button class="add_button" type="button" style="width: 170px;"
+						onclick="nochk();">
+						<a style="font-size: 8px; color: #484848;">비동의</a>
+					</button>
+				</div>
+			</div>
 		</form>
 
 

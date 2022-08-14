@@ -170,7 +170,7 @@ b {
     max-width: 1100px;
     z-index: 1000;
     margin: 104px auto 30px;
-    padding: 5px;
+    padding: 0;
     box-sizing: border-box;
     font-size: 11px;
     color: #000;

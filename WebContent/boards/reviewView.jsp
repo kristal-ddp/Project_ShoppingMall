@@ -35,6 +35,23 @@
 		<!-- content -->
 		<div class="boardContent" align="center">
 			<div class="">
+				<div class="box" style="width: 150px; float: left;">
+					<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">
+						<img src="<%=cp %>/product/image/${ordersDTO.productCategory }/${ordersDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
+					</a>
+				</div>
+				<div class="box">
+					<div class="box text">${ordersDTO.productName } / ${ordersDTO.productPrice }KRW</div>
+					<div class="box text">[옵션 : ${ordersDTO.orderColor }/${ordersDTO.orderSize }]</div>
+					<div class="box">
+						<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+							<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
+						</div>
+						<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+							<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+						</div>
+					</div>
+				</div>
 				<table border="0">
 					<colgroup>
 						<col style="width: 130px;">

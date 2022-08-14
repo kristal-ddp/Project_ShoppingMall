@@ -40,11 +40,15 @@ ul{
 
 li{
 	margin-right: 10pt;
+	
 }
 
 #content{
 	margin: 80pt;
 }
+
+
+
 
 /*  */
 
@@ -248,9 +252,12 @@ tbody{
 }
 
 input{
-	font: 11px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
+	font: 8px 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
 	color: #555;
+	font-size: 8px;
 }
+
+
 
 .orderQuantity{
 	border: none;

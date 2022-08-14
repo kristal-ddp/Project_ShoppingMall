@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -109,20 +110,56 @@
 		var f = document.paymentForm;
 		
     	f.reset();
+    	cal() 
     	
+	}
+	
+	function cal() {
+		var f = document.paymentForm;
+		var sum = 0;
+		var shippng = 0;
+		var tot = 0;
+		var i = 0;
+		
+		if (${list.size() } > 1) {
+			for (i = 0; i < ${list.size() }; i++) {
+				sum += f.price[i].value * 1;
+				tot += f.totalPrice[i].value * 1;
+			}
+		} else if (${list.size() } == 1){
+			sum += f.price.value * 1;
+			tot += f.totalPrice.value * 1;
+		}
+		
+		if (sum < 200000) {
+			shippng = 3000;
+		}
+		
+		f.sum.value = sum;
+		f.shippng.value = shippng;
+		f.tot.value = tot + shippng;
+		
 	}
 </script>
 
 </head>
-<body>
+<body onload="cal()">
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>ORDER PAYMENT</h3></div>
 		<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
 
 			<!-- 주문할 목록 -->
 			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
+				<thead>
+					<tr>
+						<th colspan="2">PRODUCT</th>
+						<th>PRICE</th>
+						<th>QUANTITY</th>
+						<th>TOTTAL PRICE</th>
+					</tr>
+				</thead>
 				<tbody>
-					<c:set var="sum" value="0"/>
 					<c:set var="tot" value="0"/>
 					<c:forEach var="dto" items="${list }">
 						<tr align="center">
@@ -138,19 +175,21 @@
 								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
 							</td>
 							<td id="productPrice">
-								<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
-								<span>${dto.productPrice }KRW</span>
+								<span style="text-decoration: line-through;">
+									<fmt:formatNumber value="${dto.productPrice }" type="number"/>KRW
+								</span><br/>
+								<fmt:formatNumber value="${dto.productPrice * 0.9 }" type="number"/>KRW
 							</td>
 							<td id="productQuantity">
 								${dto.orderQuantity }
 							</td>
 							<td id="totalProductPrice">
-								${dto.productPrice * dto.orderQuantity }KRW
-								<input type="hidden" name="orderNum" value="${dto.orderNum }"/>
+								<input type="hidden" name="orderNum" value="${dto.orderNum }">
+								<input type="hidden" name="price" value="${dto.productPrice * dto.orderQuantity }">
+								<input type="hidden" name="totalPrice" value="${dto.productPrice * 0.9 * dto.orderQuantity }">
+								<fmt:formatNumber value="${dto.productPrice * 0.9 * dto.orderQuantity}"  type="number"/>KRW
 							</td>
 						</tr>
-						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
-						<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
 					</c:forEach>
 				</tbody>
 				<c:if test="${empty list }">
@@ -231,7 +270,7 @@
 							<label for="deliveryName"><span>NAME</span></label>
 						</div>
 						<div class="box input" align="left">
-							<input type="text" name="deliveryName" class="inputStyle" placeholder="이름"/>
+							<input type="text" name="deliveryName" class="inputStyle" placeholder="이름" maxlength="20"/>
 						</div>
 					</div>
 					<div class="box row" style="height: 120px;">
@@ -239,18 +278,18 @@
 							<label for="deliveryAddr"><span>ADDRESS</span></label>
 						</div>
 						<div class="box input" style="padding: 0px;" align="left">
-							<div class="box input" style="padding: 5px 10px 5px 10px; width: 100%">
-								<input type="text" name="deliveryAddr" class="input-2 inputStyle" id="sample6_postcode" placeholder="우편번호"/>
+							<div class="box input" style="padding: 5px 0px 5px 0px; width: 370px">
+								<input type="text" name="deliveryAddr" class="input-2 inputStyle" id="sample6_postcode" placeholder="우편번호" maxlength="33"/>
 								<input type="button" onclick="sample6_execDaumPostcode()" class="join_button" style="float: right;" value="우편번호 찾기">
 							</div>
-							<div class="box input" style="padding: 5px 10px 5px 10px;">
-								<input type="text" name="deliveryAddr" class="inputStyle" id="sample6_address" placeholder="주소"/>
+							<div class="box input" style="padding: 5px 0px 5px 0px;">
+								<input type="text" name="deliveryAddr" class="inputStyle" id="sample6_address" placeholder="주소" maxlength="33"/>
 							</div>
-							<div class="box input" style="padding: 5px 10px 5px 10px;">
-								<input type="text" name="deliveryAddr" class="inputStyle" id="sample6_detailAddress" placeholder="상세주소"/>
+							<div class="box input" style="padding: 5px 0px 5px 0px;">
+								<input type="text" name="deliveryAddr" class="inputStyle" id="sample6_detailAddress" placeholder="상세주소" maxlength="33"/>
 							</div>
-							<div class="box input" style="padding: 5px 10px 5px 10px;">
-								<input type="text" name="deliveryAddr" class="inputStyle" id="sample6_extraAddress" placeholder="참고항목"/>
+							<div class="box input" style="padding: 5px 0px 5px 0px;">
+								<input type="text" name="deliveryAddr" class="inputStyle" id="sample6_extraAddress" placeholder="참고항목" maxlength="33"/>
 							</div>
 						</div>
 					</div>
@@ -259,7 +298,7 @@
 							<label for="deliveryTel"><span>TEL</span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="deliveryTel" class="inputStyle" placeholder="전화번호"/>
+							<input type="text" name="deliveryTel" class="inputStyle" placeholder="전화번호 (-)없이 숫자만 입력해주세요." maxlength="11"/>
 						</div>
 					</div>
 					<div class="box row">
@@ -267,23 +306,31 @@
 							<label for="deliveryEmail"><span>E-MAIL</span></label>
 						</div>
 						<div class="box input">
-							<input type="text" name="deliveryEmail" class="inputStyle" placeholder="이메일"/>
+							<input type="text" name="deliveryEmail" class="inputStyle" placeholder="이메일" maxlength="33"/>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- 결제정보 -->
-			<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
-				<div class="box row" style="width: 300px;" align="left" >
+			<div  id="right_area" style="display: inline-block; width: 350px; float: right; padding-right: 60px;">
+				<div class="box row" style="width: 350px;" align="left" >
 					<h3 style="margin: 0px;">결제정보</h3>
 				</div>
 				<div class="box row payment" align="right">
-					<div style="width: 180px;">
-						<div>PRICE</div><div>${sum }KRW</div><br/>
-						<div>SHIPPNG</div><div>0KRW</div><br/>
-						<div>TOTAL</div><div>${tot }KRW</div><br/>
-						<input type="hidden" name="totalPrice" value="${tot }"/>
+					<div style="width: 230px;">
+						<div>PRICE</div>
+						<div>
+							<input type="text" name="sum" value="" style="width: 65px; text-align: right; border: none;" readonly="readonly">KRW
+						</div><br/>
+						<div>SHIPPNG</div>
+						<div>
+							<input type="text" name="shippng" value="" style="width: 65px; text-align: right; border: none;" readonly="readonly">KRW
+						</div><br/>
+						<div>TOTAL</div>
+						<div>
+							<input type="text" name="tot" value="" style="width: 65px; text-align: right; border: none;" readonly="readonly">KRW
+						</div><br/>
 					</div>
 					<div style="float: right;">
 						<div style="border: 1px solid; width: 90px; height: 50px; padding-top: 35px;" align="center">

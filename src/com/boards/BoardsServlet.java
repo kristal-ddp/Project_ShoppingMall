@@ -352,12 +352,15 @@ public class BoardsServlet extends HttpServlet {
 			String community = "qna";
 			CommentsDTO commentsDTO = new CommentsDAO(conn).getReadData(boardNum, community);
 
+			ProductDTO productDTO = dto.getProductDTO();
+			
 			req.setAttribute("userId", userId);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("commentsDTO", commentsDTO);
+			req.setAttribute("productDTO", productDTO);
 
 			url = "/boards/qnaView.jsp";
 			forward(req, resp, url);
@@ -400,13 +403,16 @@ public class BoardsServlet extends HttpServlet {
 			
 			String community = "review";
 			CommentsDTO commentsDTO = new CommentsDAO(conn).getReadData(boardNum, community);
-
+			
+			OrdersDTO ordersDTO = dto.getOrdersDTO();
+			
 			req.setAttribute("userId", userId);
 			req.setAttribute("dto", dto);
 			req.setAttribute("params", param);
 			req.setAttribute("lineSu", lineSu);
 			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("commentsDTO", commentsDTO);
+			req.setAttribute("ordersDTO", ordersDTO);
 
 			url = "/boards/reviewView.jsp";
 			forward(req, resp, url);
@@ -506,6 +512,9 @@ public class BoardsServlet extends HttpServlet {
 
 			if (uri.indexOf("qnaWrite.do") != -1) {
 
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
+				
 				String str = req.getParameter("productNum");
 				
 				if (str != null) {
@@ -515,6 +524,8 @@ public class BoardsServlet extends HttpServlet {
 				}
 
 				req.setAttribute("userId", userId);
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
 
 				url = "/boards/qnaWrite.jsp";
 				forward(req, resp, url);
@@ -523,7 +534,6 @@ public class BoardsServlet extends HttpServlet {
 			} else if (uri.indexOf("noticeWrite.do") != -1) {
 
 				if (!userId.equals("KRISTAL")) {
-					System.out.println(userId);
 					out.print("<script>");
 					out.print("alert('접근권한이 없습니다.');");
 					out.print("location.href='/sub/shop/boards/notice.do';");
@@ -537,6 +547,9 @@ public class BoardsServlet extends HttpServlet {
 
 				// review Write
 			} else if (uri.indexOf("reviewWrite.do") != -1) {
+				
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
 
 				String str = req.getParameter("orderNum");
 
@@ -562,6 +575,8 @@ public class BoardsServlet extends HttpServlet {
 				}
 
 				req.setAttribute("userId", userId);
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
 
 				url = "/boards/reviewWrite.jsp";
 				forward(req, resp, url);
@@ -821,6 +836,7 @@ public class BoardsServlet extends HttpServlet {
 
 				// QnA SearchList
 			} else if (uri.indexOf("qnaSearchList.do") != -1) {
+				
 				String community = "qna";
 				String pageNum = req.getParameter("pageNum");
 				String productCategory = "";
@@ -881,6 +897,11 @@ public class BoardsServlet extends HttpServlet {
 				ProductDAO productDAO = new ProductDAO(conn);
 				List<ProductDTO> list = productDAO.getLists(start, end, searchKey, searchValue);
 
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
+				
 				req.setAttribute("lists", lists);
 				req.setAttribute("pageIndexList", pageIndexList);
 				req.setAttribute("searchListUrl", searchListUrl);
@@ -892,9 +913,16 @@ public class BoardsServlet extends HttpServlet {
 				// review SearchList
 			} else if (uri.indexOf("reviewSearchList.do") != -1) {
 
+				String subject = req.getParameter("subject");
+				String content = req.getParameter("content");
+				
+				System.out.println("SearchList subject : " + subject);
+				
 				OrdersDAO ordersDAO = new OrdersDAO(conn);
 				List<OrdersDTO> list = ordersDAO.getList(userId, "orderList");
 
+				req.setAttribute("subject", subject);
+				req.setAttribute("content", content);
 				req.setAttribute("list", list);
 
 				url = "/boards/reviewSearchList.jsp";

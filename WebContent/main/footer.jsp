@@ -7,17 +7,18 @@
 <div id="footer">
 	<div class="xans-element- xans-layout xans-layout-footer cboth bt_backbg ">
 		<div class="bt_shopinfo2">
-			<span>EMAIL: GOOAOFFICIAL@NAVER.COM</span><br> <span>CUSTOMER
+			<span>EMAIL: KRISTALOFFICIAL@NAVER.COM</span><br> <span>CUSTOMER
 				SERVICES: 070-7954-3714</span><br> <span>ADDRESS: 21
 				DASANJUNGANG-RO 19 GIL NAMYANGJU-SI<br> GYEONGGI-DO REPUBLIC OF
 				KOREA
 			</span>
 		</div>
 		<div class="bt_shopinfo">
-			<span>COMPANY: GOOA</span><br> <span>OWNER: HEE SU LEE</span> <span>
+			<span>COMPANY: Kristal</span><br> <span>OWNER: PARK SOO JUNG</span><br/>
+			<span>
 				REGISTRATION: 898-38-00550</span><br> <span>MAIL ORDER LICENSE:
-				2021-DASAN-0629</span><br> <span>BANK ACCOUNT: SHINHAN
-				110-526-775262 GOOA</span>
+				2022-DASAN-0629</span><br> <span>BANK ACCOUNT: SHINHAN
+				110-526-775262 </span>
 		</div>
 		<div class="bt_cs">
 			<a href="/shopinfo/company.html"> </a><br> <a

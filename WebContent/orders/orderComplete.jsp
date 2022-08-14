@@ -18,13 +18,12 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>ORDER COMPLETE</h3></div>
 		<form action="<%=cp%>/shop/orders/orderPayment_ok.do" method="post" name="paymentForm">
 			
 			<!-- 결제완료 -->
-			<div class="box row" align="center" style="width: 900px; margin-bottom: 50px;">
-				<div class="box row" style="width: 900px;" align="left">
-					<h1>결제완료</h1>
-				</div>
+			<div class="box row" align="center" style="width: 1000px; margin-bottom: 50px;">
+				<div class="box row" style="width: 1000px;" align="center"></div>
 				<div style="padding: 50px;">
 					주문이 완료되었습니다.<br/>
 					주문 시간 : ${ddto.deliveryDate }<br/>
@@ -85,24 +84,19 @@
 			</div>
 
 			<!-- 결제정보 -->
-			<div  id="right_area" style="display: inline-block; width: 300px; float: right; padding-right: 60px;">
-				<div class="box row" style="width: 300px;" align="left" >
+			<div  id="right_area" style="display: inline-block; width: 350px; float: right; padding-right: 60px;">
+				<div class="box row" style="width: 350px;" align="left" >
 					<h3 style="margin: 0px;">결제정보</h3>
 				</div>
 				<div class="box row payment" align="right" style="height: 40px;">
-					<div style="width: 180px;">
-						<%-- 
-						<div>PRICE</div><div>${sum }KRW</div><br/>
-						<div>SHIPPNG</div><div>0KRW</div><br/>
-						 --%>
+					<div style="width: 230px;">
 						<div>TOTAL</div><div>${ddto.totalPrice }KRW</div><br/>
 					</div>
 				</div>
 			</div>
 			
-			<div class="box row" align="center" style="width: 900px; margin-bottom: 50px; padding: 0px; display: inline-block;">
-				<div class="box row" style="width: 900px;" align="left">
-				</div>
+			<div class="box row" align="center" style="width: 1000px; margin-bottom: 50px; padding: 0px; display: inline-block;">
+				<div class="box row" style="width: 1000px;" align="left"></div>
 				<div style="padding: 50px;">
 					<div align="center" style="display: inline-block; margin-right: 50px;">
 						<div style="border: 1px solid; width: 150px; height: 30px; padding-top: 15px;">

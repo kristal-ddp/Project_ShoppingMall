@@ -19,6 +19,11 @@
 		
 	var f = document.myForm;
 		
+	if (${empty ordersDTO}) {
+		alert("리뷰를 작성할 상품을 선택하세요.");
+		return;
+	}
+	
 	var	str = f.subject.value;
 		str = str.trim();
 		if(!str){
@@ -41,6 +46,14 @@
 		f.submit();
 		
 	}
+	
+	function searchList() {
+		
+		window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100');
+		
+	}
+	
+	
 </script>
 
 </head>
@@ -72,7 +85,7 @@
 										<a href="<%=cp %>/shop/product/detail.do?productNum=${ordersDTO.productNum }">상품정보 보기</a>
 									</div>
 									<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
-										<a href="javascript:window.open('<%=cp %>/shop/boards/reviewSearchList.do','상품정보 선택','width=600, height=500, status=yes, top=100, left=100')">상품정보 선택</a>
+										<a href="searchList()">상품정보 선택</a>
 									</div>
 								</div>
 							</div>
@@ -80,7 +93,7 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="subject">SUBJECT</label></div>
-						<div class="box input"><input type="text" name="subject"></div>
+						<div class="box input"><input type="text" name="subject" value="${subject }"></div>
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>
@@ -89,7 +102,7 @@
 					<div class="box row">
 						<label for="userId">CONTENT</label><br/>
 						<div class="box input">
-							<textarea name="content"></textarea>
+							<textarea name="content">${content }</textarea>
 						</div>
 					</div>
 					<div class="box row" align="center">

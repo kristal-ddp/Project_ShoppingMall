@@ -81,7 +81,7 @@
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="subject">SUBJECT</label></div>
-						<div class="box input"><input type="text" name="subject"></div>
+						<div class="box input"><input type="text" name="subject" value="${subject }"></div>
 					</div>
 					<div class="box row" style="margin: 0px;">
 						<div class="box label"><label for="userId">ID</label></div>
@@ -90,7 +90,7 @@
 					<div class="box row">
 						<label for="content">CONTENT</label><br/>
 						<div class="box input">
-							<textarea name="content"></textarea>
+							<textarea name="content">${content }</textarea>
 						</div>
 					</div>
 					<div class="box row" align="center">

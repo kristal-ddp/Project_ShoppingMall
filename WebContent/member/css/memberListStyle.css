@@ -59,7 +59,7 @@ b {
 
 #userPwd{
 	display: inline-block;
-    width: 100px;
+   /*  width: 100px; */
     font: 9pt 'S-CoreDream-3Light','NeueHaasDisplay','Roboto','Noto Sans KR','Helvetica','Malgun Gothic',sans-serif;
     border: none;
     float: left;

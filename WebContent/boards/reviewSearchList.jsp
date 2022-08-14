@@ -36,6 +36,8 @@ td {
 				<thead>
 					<tr align="center" style="border-bottom: 1px solid #AAAAAA;">
 						<th id="saveFileName" width="80px">
+							<input type="hidden" name="subject" value="${subject }">
+							<input type="hidden" name="content" value="${content }">
 							상품 이미지
 						</th>
 						<th id="productName">

@@ -34,6 +34,21 @@
 		<div class="boardTitle" align="center">Q&A</div>
 		<!-- content -->
 		<div class="boardContent" align="center">
+			<div>
+				<div class="box" style="width: 150px; float: left;">
+					<a href="<%=cp %>/shop/product/detail.do?productNum=${productDTO.productNum }">
+						<img src="<%=cp %>/product/image/${productDTO.productCategory }/${productDTO.saveFileName[0] }" width="100px" style="margin: 10px; display: inline;">
+					</a>
+				</div>
+				<div class="box">
+					<div class="box text">${productDTO.productName } / ${productDTO.productPrice }KRW</div>
+					<div class="box">
+						<div style="border: 1px solid; width: 80px; padding: 5px; display: inline-block;">
+							<a href="<%=cp %>/shop/product/detail.do?productNum=${productDTO.productNum }">상품정보 보기</a>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="">
 				<table border="0">
 					<colgroup>

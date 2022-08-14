@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -17,11 +18,19 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content" align="center" style="display: block;">
+		<div align="center" style="font-weight: 700; padding-top: 15px; font: 10pt;"><h3>WISH LIST</h3></div>
 		<form action="" method="post" name="cartListForm">
 			<table id="cartList" style="border-top: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; padding: 20px 0px 20px 0px; margin-bottom: 50px;">
+				<thead>
+					<tr>
+						<th colspan="2">PRODUCT</th>
+						<th>PRICE</th>
+						<th>QUANTITY</th>
+						<th>TOTTAL PRICE</th>
+						<th>ADD / DEL</th>
+					</tr>
+				</thead>
 				<tbody>
-					<c:set var="sum" value="0"/>
-					<c:set var="tot" value="0"/>
 					<c:forEach var="dto" items="${list }">
 						<tr align="center">
 							<td id="saveFileName">
@@ -36,33 +45,41 @@
 								<span class="productOption">[옵션 : ${dto.orderColor }/${dto.orderSize }]</span>
 							</td>
 							<td id="productPrice">
-								<span style="text-decoration: line-through;">${dto.productPrice }KRW</span><br/>
-								<span>${dto.productPrice }KRW</span>
+								<span style="text-decoration: line-through;">
+									<fmt:formatNumber value="${dto.productPrice }" type="number"/>KRW
+								</span><br/>
+								<fmt:formatNumber value="${dto.productPrice * 0.9 }" type="number"/>KRW
 							</td>
 							<td id="productQuantity">
 								${dto.orderQuantity }&nbsp;&nbsp;&nbsp;
 								<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity + 1 }">
 									+</a>&nbsp;
-								<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
-									-</a>
+								<c:if test="${dto.orderQuantity > 1 }">
+									<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }">
+										-</a>
+								</c:if>
+								<c:if test="${dto.orderQuantity == 1 }">
+									<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&orderQuantity=${dto.orderQuantity - 1 }"
+										onclick="if(!confirm('찜리스트에서 삭제 하시겠습니까?')){return false;}">
+										-</a>
+								</c:if>
 							</td>
 							<td id="totalProductPrice">
-								${dto.productPrice * dto.orderQuantity }KRW
+								<fmt:formatNumber value="${dto.productPrice * 0.9 * dto.orderQuantity }" type="number"/>KRW
 							</td>
 							<td id="delete">
-							<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&progress=cartList">추가</a>&nbsp;&nbsp;&nbsp;
-								<a href="<%=cp%>/shop/orders/deleteOrder_ok.do?orderNum=${dto.orderNum }"
-									onclick="if(!confirm('찜리스트에서 삭제 하시겠습니까??')){return false;}">X</a>
+							<a href="<%=cp%>/shop/orders/changeOrder_ok.do?orderNum=${dto.orderNum }&progress=cartList"
+								onclick="if(!confirm('장바구니에 추가 하시겠습니까?')){return false;}">담기</a>&nbsp;/&nbsp;
+							<a href="<%=cp%>/shop/orders/deleteOrder_ok.do?orderNum=${dto.orderNum }"
+								onclick="if(!confirm('찜리스트에서 삭제 하시겠습니까?')){return false;}">X</a>
 							</td>
 						</tr>
-						<c:set var="sum" value="${sum + dto.productPrice * dto.orderQuantity }"/>
-						<c:set var="tot" value="${tot + dto.productPrice * dto.orderQuantity }"/>
 					</c:forEach>
 				</tbody>
 				<c:if test="${empty list }">
 					<tfoot>
 						<tr align="center">
-							<td style="font-size: 10pt;color: #555555;">
+							<td colspan="6" style="font-size: 10pt;color: #555555;">
 								찜한 상품이 없습니다.
 							</td>
 						</tr>

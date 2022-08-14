@@ -218,7 +218,6 @@ public class QnaDAO {
 
 			if (rs.next()) {
 				dataCount = rs.getInt(1);
-				System.out.println(dataCount);
 			}
 			
 			rs.close();

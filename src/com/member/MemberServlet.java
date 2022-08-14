@@ -15,6 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import com.util.DBConn;
 
+
+
+
+
 public class MemberServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -61,12 +65,17 @@ public class MemberServlet extends HttpServlet {
 				url = "/member/terms.jsp";
 				forward(req, resp, url);
 
-			
+				
+				
+				
+				
 			}// 회원가입 화면
 			else if (uri.indexOf("join.do") != -1) {
 
 				url = "/member/join.jsp";
 				forward(req, resp, url);
+				
+				
 
 				
 			}else if (uri.indexOf("join_ok.do") != -1) {
@@ -99,6 +108,13 @@ public class MemberServlet extends HttpServlet {
 					resp.sendRedirect(url);
 
 				}
+				
+				
+			
+				
+			
+				
+			
 
 			// 회원가입 결과화면
 			} else if (uri.indexOf("join_result.do") != -1) {
@@ -110,16 +126,52 @@ public class MemberServlet extends HttpServlet {
 				forward(req, resp, url);
 				
 				
-			// 로그인 화면
-			} else if (uri.indexOf("login.do") != -1) {
-
+				
+				//아이디 중복확인
+			}else if(uri.indexOf("idcheck.do")!=-1) {
+				
+				url = "/member/idcheck.jsp";
+				forward(req, resp, url);
+				
+				
+			}else if(uri.indexOf("idcheck_ok.do")!=-1) {
+				
+				String Id = req.getParameter("userId");
+				
+				System.out.println(Id);
+				
+				MemberDTO dto = dao.getReadData(Id);
+				
+				
+				
+				
+				if(dto==null || dto.equals(Id) ) {
+					
+					req.setAttribute("message1", "이미 사용중인 아이디입니다.");
+					url = "/member/idcheck.jsp";
+					forward(req, resp, url);
+					return;
+					
+				}else if( dto.getUserId()==null) {
+					
+					req.setAttribute("message2", "사용가능 아이디입니다.");
+					
+					
+					url = "/member/idcheck.jsp";
+					forward(req, resp, url);
+					return;
+				}
+				
+				} else if (uri.indexOf("login.do") != -1) {
+				
+//				String preUrl = req.getHeader("REFERER");
+//				req.getSession().setAttribute("preUrl", preUrl);
+				
 				url = "/member/login.jsp";
 				forward(req, resp, url);
 
 			// 로그인 실행
 			} else if (uri.indexOf("login_ok.do") != -1) {
-				
-				
 				
 				userId = req.getParameter("userId");
 				String userPwd = req.getParameter("userPwd");
@@ -136,7 +188,6 @@ public class MemberServlet extends HttpServlet {
 					req.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요.");
 					req.setAttribute("searchpw", "비밀번호 찾기");
 					
-					
 					url = "/member/login.jsp";
 					forward(req, resp, url);
 					return;
@@ -144,14 +195,16 @@ public class MemberServlet extends HttpServlet {
 					
 				} else {
 
-					req.getSession().setAttribute("userId", userId);
-
+					HttpSession session = req.getSession();
 					
-					/*url = req.getHeader("REFERER");
-					System.out.println(url);*/
+//					url = (String) session.getAttribute("preUrl");
+//					session.removeAttribute("preUrl");
+
+					session.setAttribute("userId", userId);
+					
 					url = cp + "/shop/main/main.do";
-					/*resp.sendRedirect(req.getHeader("referer"));*/
 					resp.sendRedirect(url);
+					
 				}
 			
 			}else if(uri.indexOf("findId.do")!=-1) {
@@ -225,7 +278,7 @@ public class MemberServlet extends HttpServlet {
 			}else {
 
 				out.print("<script>");
-				out.print("alert('잘못된 접근 :12로그인을 해주세요');");
+				out.print("alert('잘못된 접근 :로그인을 해주세요');");
 				out.print("location.href='" + cp + "/shop/member/login.do';");
 				out.print("</script>");
 				
@@ -286,10 +339,9 @@ public class MemberServlet extends HttpServlet {
 
 				url = cp + "/shop/member/myPage.do";
 				resp.sendRedirect(url);
-
-			// 탈퇴 실행
-			// 오류
-			} else if (uri.indexOf("delete.do")!=-1) {
+				
+				
+				}else if (uri.indexOf("delete.do")!=-1) {
 				
 				MemberDTO dto = dao.getReadData(userId);
 
@@ -300,15 +352,18 @@ public class MemberServlet extends HttpServlet {
 	
 			}else if (uri.indexOf("delete_ok.do") != -1) {
 				
-				MemberDTO dto = dao.getReadData(userId);
+				HttpSession session = req.getSession();
 				
+				String id = req.getParameter("userId");
+				MemberDTO dto = dao.getReadData(id);
 				dao.delete(dto);
 
-				HttpSession session = req.getSession();
+
+				session = req.getSession();
 				session.removeAttribute("userId");
 				session.invalidate();
 
-				url = cp + "/shop/member/delete_result.do";
+				url = cp + "/shop/main/main.do";
 				resp.sendRedirect(url);
 				
 			}else if(uri.indexOf("delete_result.do")!=-1) {
